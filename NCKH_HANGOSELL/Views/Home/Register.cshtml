@@ -1,0 +1,80 @@
+﻿@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model NCKH_HANGOSELL.Models.User
+
+<div class="login-right">
+    <div class="login-right-wrap">
+        <h1>Welcome to Register</h1>
+        <p class="account-subtitle">Enter details to create your account</p>
+        <h2>Sign Up</h2>
+
+        <form asp-controller="UserRoles" asp-action="Register" method="post">
+            <div class="form-group">
+                <label for="name">Họ và tên <span class="login-danger">*</span></label>
+                <input type="text" id="name" class="form-control"  name="name" value="{{ old('name') }}">
+                <span class="profile-views"><i class="fas fa-user-circle"></i></span>
+             
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            </div>
+            <div class="form-group">
+                <label for="email">Email <span class="login-danger">*</span></label>
+                <input type="email" id="email" class="form-control " name="email" value="{{ old('email') }}">
+                <span class="profile-views"><i class="fas fa-envelope"></i></span>
+               
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+               
+            </div>
+            <input type="hidden" name="image" value="photo_defaults.jpg">
+            <div class="form-group local-forms">
+                <label for="role_name">Tên vai trò <span class="login-danger">*</span></label>
+                <select id="role_name" class="form-control select " name="role_name">
+                    <option value="" selected disabled>Loại vai trò</option>
+                    <option value=""></option>
+                </select>
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            </div>
+            <div class="form-group">
+                <label for="password">Mật khẩu <span class="login-danger">*</span></label>
+                <input type="password" id="password" class="form-control pass-input " name="password">
+                <span class="profile-views feather-eye toggle-password"></span>
+                
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            </div>
+            <div class="form-group">
+                <label for="password_confirmation">Xác nhận mật khẩu <span class="login-danger">*</span></label>
+                <input type="password" id="password_confirmation" class="form-control pass-confirm " name="password_confirmation">
+                <span class="profile-views feather-eye reg-toggle-password"></span>
+                
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                
+            </div>
+            <div class="dont-have">Đã có tài khoản? <a href="{{ route('login') }}">Đăng nhập</a></div>
+            <div class="form-group mb-0">
+                <button class="btn btn-primary btn-block" type="submit">Đăng ký</button>
+            </div>
+        </form>
+        <div class="login-or">
+            <span class="or-line"></span>
+            <span class="span-or">hoặc</span>
+        </div>
+        <div class="social-login">
+            <a href="#"><i class="fab fa-google-plus-g"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+    </div>
+</div>
