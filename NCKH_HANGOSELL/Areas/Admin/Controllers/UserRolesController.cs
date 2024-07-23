@@ -28,7 +28,7 @@ namespace NCKH_HANGOSELL.Areas.Admin.Controllers
                 // Nếu đã đăng nhập, lưu thông tin người dùng vào ViewData
                 ViewData["Name"] = HttpContext.Session.GetString("Name");
 
-                // Lấy danh sách người dùng và hiển thị
+                // Nếu đã đăng nhập, lấy danh sách người dùng và hiển thị
                 List<User> users = userrolesService.GetAllUsers();
                 return View(users);
             }
@@ -53,7 +53,6 @@ namespace NCKH_HANGOSELL.Areas.Admin.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
-
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
@@ -72,7 +71,6 @@ namespace NCKH_HANGOSELL.Areas.Admin.Controllers
         public IActionResult CreateUserRoles(User user)
         {
             user.RecordCreatedOn = DateTime.Now;
-            user.JoinDate = DateTime.Now;
             userrolesService.AddUserRoles(user);
             return RedirectToAction("IndexUserRoles");
         }

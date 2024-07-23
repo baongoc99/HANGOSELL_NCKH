@@ -1,4 +1,4 @@
-﻿namespace NCKH_HANGOSELL.Models
+namespace NCKH_HANGOSELL.Models
 {
     public class ErrorViewModel
     {

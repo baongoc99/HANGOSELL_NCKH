@@ -559,4 +559,7 @@ D:\NCKH_HANGOSELL\NCKH_HANGOSELL\bin\Debug\net8.0\Microsoft.AspNetCore.Mvc.Razor
 D:\NCKH_HANGOSELL\NCKH_HANGOSELL\bin\Debug\net8.0\PagedList.Core.dll
 D:\NCKH_HANGOSELL\NCKH_HANGOSELL\bin\Debug\net8.0\PagedList.Core.Mvc.dll
 D:\NCKH_HANGOSELL\NCKH_HANGOSELL\obj\Debug\net8.0\NCKH_HANGOSELL.MvcApplicationPartsAssemblyInfo.cs
+<<<<<<< HEAD
 D:\NCKH_HANGOSELL\NCKH_HANGOSELL\obj\Debug\net8.0\NCKH_HANGOSELL.sourcelink.json
+=======
+>>>>>>> 4ca512f637f85e154511e25fdf1f35da671bd818
