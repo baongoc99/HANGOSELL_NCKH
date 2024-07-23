@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <title>Login</title>
+    <link rel="shortcut icon" href="@Url.Content("~/Adminassets/img/iconlogo.png")">
+    <link rel="stylesheet" href="@Url.Content("~/Adminassets/plugins/bootstrap/css/bootstrap.min.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Adminassets/plugins/feather/feather.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Adminassets/plugins/icons/flags/flags.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Adminassets/plugins/fontawesome/css/fontawesome.min.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Adminassets/plugins/fontawesome/css/all.min.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Adminassets/plugins/select2/css/select2.min.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Adminassets/css/style.css")">
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+
+
+    <link rel="stylesheet" href="@Url.Content("~/Adminassets/css/toastr.min.css")">
+    <script src="@Url.Content("~/Adminassets/js/toastr_jquery.min.js")"></script>
+    <script src="@Url.Content("~/Adminassets/js/toastr.min.js")"></script>
+
+
+</head>
+
+<body>
+    <style>
+        .invalid-feedback {
+            font-size: 14px;
+        }
+    </style>
+    <div class="main-wrapper login-body">
+        <div class="login-wrapper">
+            <div class="container">
+                <div class="loginbox">
+                    <div class="login-left">
+                        <img class="img-fluid" src="@Url.Content("~/Adminassets/img/Logo.png")" alt="Logo">
+                    </div>
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="@Url.Content("~/Adminassets/js/jquery-3.6.0.min.js")"></script>
+    <script src="@Url.Content("~/Adminassets/plugins/bootstrap/js/bootstrap.bundle.min.js")"></script>
+    <script src="@Url.Content("~/Adminassets/js/feather.min.js")"></script>
+    <script src="@Url.Content("~/Adminassets/plugins/select2/js/select2.min.js")"></script>
+    <script src="@Url.Content("~/Adminassets/js/script.js")"></script>
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2024 - NCKH_HANGOSELL - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    @* Render Scripts section *@
+    @RenderSection("scripts", required: false)
+</body>
+
+</html>
+

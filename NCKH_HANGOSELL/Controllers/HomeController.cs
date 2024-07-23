@@ -14,24 +14,10 @@ namespace NCKH_HANGOSELL.Controllers
         {
             _context = context;
         }
-        public IActionResult Index()
+        public IActionResult Login()
         {
             return View();
         }
 
-     /*   public IActionResult Logins(string userid, string password)
-        {
-            User user = CheckUserUsnamePass(userid, password);
-            if (user != null)
-            {
-                return 
-            }
-        }
-
-        private User CheckUserUsnamePass(string userid, string password)
-        {
-            User user = _context.Users.FirstOrDefault(u => u.UserId == userid && u.Password == password);
-            return user;
-        }*/
     }
 }

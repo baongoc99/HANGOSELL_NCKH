@@ -34,8 +34,8 @@ namespace NCKH_HANGOSELL.Areas.Admin.Controllers
             }
             else
             {
-                // Nếu chưa đăng nhập, chuyển hướng đến trang chủ
-                return RedirectToAction("Index", "Home");
+                // Nếu chưa đăng nhập, chuyển hướng đến trang login
+                return RedirectToAction("Login", "Home");
             }
         }
 
@@ -56,7 +56,7 @@ namespace NCKH_HANGOSELL.Areas.Admin.Controllers
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Home");
         }
 
 
@@ -68,8 +68,39 @@ namespace NCKH_HANGOSELL.Areas.Admin.Controllers
 
         // Thêm người dùng mới
         [HttpPost]
-        public IActionResult CreateUserRoles(User user)
+        public IActionResult CreateUserRoles(User user, IFormFile image)
         {
+            var fileExtension = Path.GetExtension(image.FileName).ToLowerInvariant();
+            var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
+            if (!allowedExtensions.Contains(fileExtension))
+            {
+                return RedirectToAction("Index");
+            }
+            // Ensure unique file name
+            var uniqueFileName = Guid.NewGuid().ToString() + fileExtension;
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", uniqueFileName);
+            // Create directory if it doesn't exist
+            var directoryPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
+            if (!Directory.Exists(directoryPath))
+            {
+                Directory.CreateDirectory(directoryPath);
+            }
+            try
+            {
+                // Save the file
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                     image.CopyTo(stream);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle file saving exceptions
+                // Optionally log the error and return an appropriate view
+                return RedirectToAction("Error", "Home");
+            }
+            var relativePath = Path.Combine("images", uniqueFileName).Replace("\\", "/");
+            user.Avatar = relativePath;
             user.RecordCreatedOn = DateTime.Now;
             userrolesService.AddUserRoles(user);
             return RedirectToAction("IndexUserRoles");
@@ -119,7 +150,7 @@ namespace NCKH_HANGOSELL.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login(string userid, string password)
+        public IActionResult Logins(string userid, string password)
         {
             User user = userrolesService.CheckUserUsnamePass(userid, password);
             if (user != null)
@@ -134,7 +165,7 @@ namespace NCKH_HANGOSELL.Areas.Admin.Controllers
                 HttpContext.Session.SetString("Position", user.Position);
 
                 // Đăng nhập thành công, chuyển hướng đến trang chính
-                return RedirectToAction("Index", "Home");
+                return Redirect($"/admin/home/");
             }
 
             // Nếu đăng nhập thất bại, hiển thị lại trang đăng nhập với thông báo lỗi
@@ -166,6 +197,8 @@ namespace NCKH_HANGOSELL.Areas.Admin.Controllers
             ViewData["DateOfBirth"] = HttpContext.Session.GetString("DateOfBirth");
             ViewData["JoinDate"] = HttpContext.Session.GetString("JoinDate");
             ViewData["PhoneNumber"] = HttpContext.Session.GetString("PhoneNumber");
+            ViewData["Position"] = HttpContext.Session.GetString("Position");
+
             return View();
 
         }
@@ -195,6 +228,6 @@ namespace NCKH_HANGOSELL.Areas.Admin.Controllers
             return View(user);
         }
 
-
+      
     }
 }

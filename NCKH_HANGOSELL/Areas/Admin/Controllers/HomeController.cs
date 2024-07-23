@@ -20,7 +20,7 @@ namespace NCKH_HANGOSELL.Areas.Admin.Controllers
             }
             else
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Login", "Home");
             }
         }
         public IActionResult Images()
