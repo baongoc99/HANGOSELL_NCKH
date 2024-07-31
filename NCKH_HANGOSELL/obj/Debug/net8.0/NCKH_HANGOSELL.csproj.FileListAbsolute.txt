@@ -1,4 +1,3 @@
-D:\NCKH_HANGOSELL\NCKH_HANGOSELL\bin\Debug\net8.0\appsettings.Development.json
 D:\NCKH_HANGOSELL\NCKH_HANGOSELL\bin\Debug\net8.0\appsettings.json
 D:\NCKH_HANGOSELL\NCKH_HANGOSELL\bin\Debug\net8.0\NCKH_HANGOSELL.staticwebassets.runtime.json
 D:\NCKH_HANGOSELL\NCKH_HANGOSELL\bin\Debug\net8.0\NCKH_HANGOSELL.exe

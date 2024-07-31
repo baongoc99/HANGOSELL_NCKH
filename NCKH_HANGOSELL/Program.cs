@@ -14,6 +14,8 @@ builder.Services.AddNotyf(config => { config.DurationInSeconds = 10; config.IsDi
 /// vòng đời kết nối data
 builder.Services.AddScoped<UserRolesService>();
 builder.Services.AddScoped<CustomerService>();
+builder.Services.AddScoped<CategoryService>();
+//builder.Services.AddScoped<ProductService>();
 
 // add
 builder.Services.AddDbContext<ApplicationDbContext>(

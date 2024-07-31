@@ -13,7 +13,8 @@ namespace NCKH_HANGOSELL.Data
 
         public DbSet<User> Users { get; set; }
         public DbSet<Customer> Customers { get; set; }
-
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Product> Products { get; set; }
 
         /*public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
