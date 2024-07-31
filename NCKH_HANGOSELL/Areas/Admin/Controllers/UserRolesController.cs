@@ -27,6 +27,9 @@ namespace NCKH_HANGOSELL.Areas.Admin.Controllers
             {
                 // Nếu đã đăng nhập, lưu thông tin người dùng vào ViewData
                 ViewData["Name"] = HttpContext.Session.GetString("Name");
+                ViewData["Avatar"] = HttpContext.Session.GetString("Avatar");
+                ViewData["Position"] = HttpContext.Session.GetString("Position");
+
 
                 // Nếu đã đăng nhập, lấy danh sách người dùng và hiển thị
                 List<User> users = userrolesService.GetAllUsers();
@@ -44,7 +47,10 @@ namespace NCKH_HANGOSELL.Areas.Admin.Controllers
         {
             if (HttpContext.Session.GetString("UserId") != null)
             {
+                // Nếu đã đăng nhập, lưu thông tin người dùng vào ViewData
                 ViewData["Name"] = HttpContext.Session.GetString("Name");
+                ViewData["Avatar"] = HttpContext.Session.GetString("Avatar");
+                ViewData["Position"] = HttpContext.Session.GetString("Position");
                 List<User> users = userrolesService.GetAllUsers();
                 return View(users);
             }
@@ -63,6 +69,10 @@ namespace NCKH_HANGOSELL.Areas.Admin.Controllers
         // Hiển thị trang thêm người dùng mới
         public IActionResult CreateUserRoles()
         {
+            // Nếu đã đăng nhập, lưu thông tin người dùng vào ViewData
+            ViewData["Name"] = HttpContext.Session.GetString("Name");
+            ViewData["Avatar"] = HttpContext.Session.GetString("Avatar");
+            ViewData["Position"] = HttpContext.Session.GetString("Position");
             return View();
         }
 
@@ -70,67 +80,119 @@ namespace NCKH_HANGOSELL.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult CreateUserRoles(User user, IFormFile image)
         {
-            var fileExtension = Path.GetExtension(image.FileName).ToLowerInvariant();
-            var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
-            if (!allowedExtensions.Contains(fileExtension))
+            if (image != null)
             {
-                return RedirectToAction("Index");
-            }
-            // Ensure unique file name
-            var uniqueFileName = Guid.NewGuid().ToString() + fileExtension;
-            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", uniqueFileName);
-            // Create directory if it doesn't exist
-            var directoryPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
-            if (!Directory.Exists(directoryPath))
-            {
-                Directory.CreateDirectory(directoryPath);
-            }
-            try
-            {
-                // Save the file
-                using (var stream = new FileStream(path, FileMode.Create))
+                var fileExtension = Path.GetExtension(image.FileName).ToLowerInvariant();
+                var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
+                if (!allowedExtensions.Contains(fileExtension))
                 {
-                     image.CopyTo(stream);
+                    return Redirect($"/Admin/UserRoles/IndexUserRoles");
                 }
+                // Ensure unique file name
+                var uniqueFileName = Guid.NewGuid().ToString() + fileExtension;
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", uniqueFileName);
+                // Create directory if it doesn't exist
+                var directoryPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
+                if (!Directory.Exists(directoryPath))
+                {
+                    Directory.CreateDirectory(directoryPath);
+                }
+                try
+                {
+                    // Save the file
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        image.CopyTo(stream);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Handle file saving exceptions
+                    // Optionally log the error and return an appropriate view
+                    return RedirectToAction("Error", "Home");
+                }
+                var relativePath = Path.Combine("images", uniqueFileName).Replace("\\", "/");
+                user.Avatar = relativePath;
             }
-            catch (Exception ex)
+            else
             {
-                // Handle file saving exceptions
-                // Optionally log the error and return an appropriate view
-                return RedirectToAction("Error", "Home");
+                user.Avatar = "images/default.jpg" ; 
             }
-            var relativePath = Path.Combine("images", uniqueFileName).Replace("\\", "/");
-            user.Avatar = relativePath;
             user.RecordCreatedOn = DateTime.Now;
             userrolesService.AddUserRoles(user);
-            return RedirectToAction("IndexUserRoles");
+            return Redirect($"/Admin/UserRoles/IndexUserRoles");
         }
 
         // Hiển thị trang cập nhật thông tin người dùng
         [HttpGet]
         public IActionResult EditUserRoles(int id)
         {
+            // Nếu đã đăng nhập, lưu thông tin người dùng vào ViewData
+            ViewData["Name"] = HttpContext.Session.GetString("Name");
+            ViewData["Avatar"] = HttpContext.Session.GetString("Avatar");
+            ViewData["Position"] = HttpContext.Session.GetString("Position");
+
             User user = userrolesService.GetUserById(id);
             return View(user);
         }
 
         // Cập nhật thông tin người dùng
         [HttpPost]
-        public IActionResult UpdateUserRoles(User user)
+        public IActionResult UpdateUserRoles(User user, IFormFile image)
         {
             if (user.Id > 0)
             {
                 var userpass = userrolesService.GetUserById(user.Id);
+
+                if (image != null)
+                {
+                    var fileExtension = Path.GetExtension(image.FileName).ToLowerInvariant();
+                    var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
+                    if (!allowedExtensions.Contains(fileExtension))
+                    {
+                        return Redirect($"/Admin/UserRoles/IndexUserRoles");
+                    }
+                    // Ensure unique file name
+                    var uniqueFileName = Guid.NewGuid().ToString() + fileExtension;
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", uniqueFileName);
+                    // Create directory if it doesn't exist
+                    var directoryPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
+                    if (!Directory.Exists(directoryPath))
+                    {
+                        Directory.CreateDirectory(directoryPath);
+                    }
+                    try
+                    {
+                        // Save the file
+                        using (var stream = new FileStream(path, FileMode.Create))
+                        {
+                            image.CopyTo(stream);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        // Handle file saving exceptions
+                        // Optionally log the error and return an appropriate view
+                        return RedirectToAction("Error", "Home");
+                    }
+                    var relativePath = Path.Combine("images", uniqueFileName).Replace("\\", "/");
+                    user.Avatar = relativePath;
+                }
+                else
+                {
+                    user.Avatar = userpass.Avatar;
+                }
                 user.RecordCreatedOn = DateTime.Now;
                 user.Password = userpass.Password;
 
                 // Sử dụng phương thức UpdateUserRoles đã sửa đổi
                 userrolesService.UpdateUserRoles(user);
-                return RedirectToAction("IndexUserRoles");
+                return Redirect($"/Admin/UserRoles/IndexUserRoles");
             }
             else
             {
-                return RedirectToAction("UpdateUserRoles", new { id = user.Id });
+                return Redirect($"/Admin/UserRoles/UpdateUserRoles?id={user.Id}");
+
             }
         }
 
@@ -139,7 +201,7 @@ namespace NCKH_HANGOSELL.Areas.Admin.Controllers
         public IActionResult DeleteUserRoles(int id)
         {
             userrolesService.DeleteUserRoles(id);
-            return RedirectToAction("IndexUserRoles");
+            return Redirect($"/Admin/UserRoles/IndexUserRoles");
         }
 
         //Đăng nhập
@@ -157,15 +219,17 @@ namespace NCKH_HANGOSELL.Areas.Admin.Controllers
             {
                 // Lưu thông tin người dùng vào session
                 HttpContext.Session.SetString("UserId", user.Id.ToString());
+                HttpContext.Session.SetInt32("Id", user.Id);
                 HttpContext.Session.SetString("Name", user.Name);
                 HttpContext.Session.SetString("Email", user.Email);
                 HttpContext.Session.SetString("JoinDate", user.JoinDate?.ToString("yyyy-MM-dd") ?? string.Empty); // Định dạng ngày
                 HttpContext.Session.SetString("DateOfBirth", user.DateOfBirth?.ToString("yyyy-MM-dd") ?? string.Empty); // Định dạng ngày
                 HttpContext.Session.SetString("PhoneNumber", user.PhoneNumber);
                 HttpContext.Session.SetString("Position", user.Position);
+                HttpContext.Session.SetString("Avatar", user.Avatar);
 
                 // Đăng nhập thành công, chuyển hướng đến trang chính
-                return Redirect($"/admin/home/");
+                return Redirect($"/Admin/Home/");
             }
 
             // Nếu đăng nhập thất bại, hiển thị lại trang đăng nhập với thông báo lỗi
@@ -191,16 +255,15 @@ namespace NCKH_HANGOSELL.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult ProfilePage()
         {
-            ViewData["UserId"] = HttpContext.Session.GetString("UserId");
+            int id = HttpContext.Session.GetInt32("Id").Value;
+
+            // Nếu đã đăng nhập, lưu thông tin người dùng vào ViewData
             ViewData["Name"] = HttpContext.Session.GetString("Name");
-            ViewData["Email"] = HttpContext.Session.GetString("Email");
-            ViewData["DateOfBirth"] = HttpContext.Session.GetString("DateOfBirth");
-            ViewData["JoinDate"] = HttpContext.Session.GetString("JoinDate");
-            ViewData["PhoneNumber"] = HttpContext.Session.GetString("PhoneNumber");
+            ViewData["Avatar"] = HttpContext.Session.GetString("Avatar");
             ViewData["Position"] = HttpContext.Session.GetString("Position");
 
-            return View();
-
+            User user = userrolesService.GetUserById(id);
+            return View(user);
         }
 
         [HttpPost]

@@ -26,6 +26,18 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes = true
 build_property.MSBuildProjectDirectory = D:\NCKH_HANGOSELL\NCKH_HANGOSELL
 build_property._RazorSourceGeneratorDebug = 
 
+[D:/NCKH_HANGOSELL/NCKH_HANGOSELL/Areas/Admin/Views/Customer/CreateCustomer.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ3VzdG9tZXJcQ3JlYXRlQ3VzdG9tZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/NCKH_HANGOSELL/NCKH_HANGOSELL/Areas/Admin/Views/Customer/EditCustomer.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ3VzdG9tZXJcRWRpdEN1c3RvbWVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/NCKH_HANGOSELL/NCKH_HANGOSELL/Areas/Admin/Views/Customer/IndexCustomer.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ3VzdG9tZXJcSW5kZXhDdXN0b21lci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/NCKH_HANGOSELL/NCKH_HANGOSELL/Areas/Admin/Views/Home/Images.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcSG9tZVxJbWFnZXMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

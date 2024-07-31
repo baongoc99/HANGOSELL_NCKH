@@ -1,0 +1,124 @@
+﻿@model IEnumerable<NCKH_HANGOSELL.Models.Customer>
+
+@{
+    ViewData["Title"] = "List Customer";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-wrapper">
+    <div class="content container-fluid">
+        <div class="page-header">
+
+            <div class="row align-items-center">
+                <div class="col">
+                    <h3 class="page-title">List Customer</h3>
+                    <div class="col-auto text-end float-end ms-auto download-grp">
+                        <a href="/Admin/Customer/IndexCustomer" class="btn btn-outline-gray me-2 active">
+                            <i class="fa fa-list" aria-hidden="true"></i>
+                        </a>
+                        <a href="/Admin/Customer/CreateCustomer" class="btn btn-outline-gray me-2">
+                            <i class="fas fa-plus"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="card card-table comman-shadow">
+                <div class="card-body">
+
+                    <div class="table-responsive">
+                        <table class="table border-0 star-customer table-hover table-center mb-0 datatable table-striped">
+                            <thead class="customer-thread">
+                                <tr>
+                                    <th>
+                                        <div class="form-check check-tables">
+                                            <input class="form-check-input" type="checkbox" value="something">
+                                        </div>
+                                    </th>
+                                    <th class="text-center">ID</th>
+                                    <th class="text-center">Company</th>
+                                    <th class="text-center">Contact Person</th>
+                                    <th class="text-center">Email</th>
+                                    <th class="text-center">Phone Number</th>
+                                    <th class="text-center">Address</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    if (item.CustomerType != "Khách lẻ")
+                                    {
+                                        <tr>
+                                            <td>
+                                                <div class="form-check check-tables">
+                                                    <input class="form-check-input" type="checkbox" value="something">
+                                                </div>
+                                            </td>
+                                            <td class="text-center">@item.Id</td>
+                                            <td class="text-center">@item.CompanyName</td>
+                                            <td class="text-center">@item.ContactPerson</td>
+                                            <td class="text-center">@item.Email</td>
+                                            <td class="text-center">@item.PhoneNumber</td>
+                                            <td class="text-center">@item.Address</td>
+                                            <td class="text-center">
+                                                <a href="/Admin/Customer/EditCustomer/@item.Id" class="btn btn-sm btn-warning">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                                <a href="/Admin/Customer/DetailCustomer/@item.Id" class="btn btn-sm btn-info">
+                                                    <i class="fa fa-info-circle"></i>
+                                                </a>
+                                                <a href="/Admin/Customer/DeleteCustomer/@item.Id" class="btn btn-sm btn-danger">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{-- Modal customer delete --}}
+<div class="modal fade contentmodal" id="customerUser" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content doctor-profile">
+            <div class="modal-header pb-0 border-bottom-0 justify-content-end">
+                <button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="feather-x-circle"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="Delete" asp-controller="Customer" method="post">
+                    <div class="delete-wrap text-center">
+                        <div class="del-icon">
+                            <i class="feather-x-circle"></i>
+                        </div>
+                        <input type="hidden" name="Id" class="e_id" value="">
+                        <h2>Sure you want to delete</h2>
+                        <div class="submit-section">
+                            <button type="submit" class="btn btn-success me-2">Yes</button>
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">No</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).on('click', '.customer_delete', function () {
+            var _this = $(this).closest('tr');
+            $('.e_id').val(_this.find('.id').text());
+        });
+    </script>
+}

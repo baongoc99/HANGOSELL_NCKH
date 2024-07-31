@@ -24,19 +24,24 @@
             <div class="col-md-12">
                 <div class="profile-header">
                     <div class="row align-items-center">
-                        <div class="col-auto profile-image">
-                            <a href="#">
-                                @* <img class="rounded-circle" alt="@Model.Name" src="~/images/@Model.Avatar"> *@
-                            </a>
-                        </div>
-                        <div class="col ms-md-n2 profile-user-info">
-                            <h4 class="user-name mb-0">@Model?.Name</h4>
-                            <h6 class="text-muted">@Model?.Position</h6>
-                            <div class="about-text">@Model?.UserId</div>
-                        </div>
-                        <div class="col-auto profile-btn">
-                            <a href="@Url.Action("Edit", "Profile")" class="btn btn-primary">Edit</a>
-                        </div>
+                        @if(Model!=null){
+                            <div class="col-auto profile-image">
+                                <a href="#">
+                                    <img class="rounded-circle" alt="@Model.Name" src="~/@Model.Avatar">
+                                </a>
+                            </div>
+                            <div class="col ms-md-n2 profile-user-info">
+                                <h4 class="user-name mb-0">@Model.Name</h4>
+                                <h6 class="text-muted">@Model.Position</h6>
+                                <div class="about-text">@Model.UserId</div>
+                            </div>
+                            <div class="col-auto profile-btn">
+                                <a href="/Admin/UserRoles/EditUserRoles" class="btn btn-primary">Edit</a>
+                            </div>
+                        }else
+                        {
+                            <p>roongx</p>
+                        }
                     </div>
                 </div>
                 <div class="profile-menu">
@@ -65,23 +70,23 @@
                                         </h5>
                                         <div class="row">
                                             <p class="col-sm-3 text-muted text-sm-end mb-0 mb-sm-3">Name</p>
-                                            <p class="col-sm-9">@ViewData["Name"]</p>
+                                            <p class="col-sm-9">@Model.Name</p>
                                         </div>
                                         <div class="row">
                                             <p class="col-sm-3 text-muted text-sm-end mb-0 mb-sm-3">Email</p>
-                                            <p class="col-sm-9">@ViewData["Email"]</p>
+                                            <p class="col-sm-9">@Model.Email</p>
                                         </div>
                                         <div class="row">
                                             <p class="col-sm-3 text-muted text-sm-end mb-0 mb-sm-3">Date of Birth</p>
-                                            <p class="col-sm-9">@ViewData["DateOfBirth"]</p>
+                                            <p class="col-sm-9">@Model.DateOfBirth?.ToString("yyyy-MM-dd")</p>
                                         </div>
                                         <div class="row">
                                             <p class="col-sm-3 text-muted text-sm-end mb-0 mb-sm-3">Join Date</p>
-                                            <p class="col-sm-9">@ViewData["JoinDate"]</p>
+                                            <p class="col-sm-9">@Model.JoinDate?.ToString("yyyy-MM-dd")</p>
                                         </div>
                                         <div class="row">
                                             <p class="col-sm-3 text-muted text-sm-end mb-0 mb-sm-3">Mobile</p>
-                                            <p class="col-sm-9">@ViewData["PhoneNumber"]</p>
+                                            <p class="col-sm-9">@Model.PhoneNumber</p>
                                         </div>
                                     </div>
                                 </div>

@@ -1,0 +1,83 @@
+﻿@model NCKH_HANGOSELL.Models.Customer
+
+@{
+    ViewData["Title"] = "Create Customer";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-wrapper">
+    <div class="content container-fluid">
+        <div class="page-header">
+
+            <div class="row align-items-center">
+                <div class="col">
+                    <h3 class="page-title">Add Customer</h3>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="time-table.html">Customers</a></li>
+                        <li class="breadcrumb-item active">Add Customer</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        @if (TempData["Message"] != null)
+        {
+            <div class="alert alert-success">
+                @TempData["Message"]
+            </div>
+        }
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card comman-shadow">
+                    <div class="card-body">
+                        <form action="/Admin/Customer/CreateCustomer" method="POST" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Company <span class="login-danger">*</span></label>
+                                        <input type="text" id="companyName" class="form-control" name="CompanyName" value="@Model?.CompanyName" required >
+                                        <span asp-validation-for="CompanyName" class="invalid-feedback"></span>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Contact Person <span class="login-danger">*</span></label>
+                                        <input type="text" id="contactPerson" class="form-control" name="ContactPerson" value="@Model?.ContactPerson" required />
+                                        <span asp-validation-for="ContactPerson" class="invalid-feedback"></span>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>E-Mail <span class="login-danger">*</span></label>
+                                        <input type="email" id="email" class="form-control" name="Email" value="@Model?.Email" required />
+                                        <span asp-validation-for="Email" class="invalid-feedback"></span>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Phone</label>
+                                        <input type="text" id="phoneNumber" class="form-control" name="PhoneNumber" value="@Model?.PhoneNumber" required />
+                                        <span asp-validation-for="PhoneNumber" class="invalid-feedback" ></span>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Address</label>
+                                        <input type="text" id="address" class="form-control" name="Address" value="@Model?.Address" required />
+                                        <span asp-validation-for="Address" class="invalid-feedback"></span>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="customer-submit">
+                                        <button type="submit" class="btn btn-primary">Create</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+}
+

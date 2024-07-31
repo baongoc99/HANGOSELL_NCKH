@@ -12,8 +12,10 @@ namespace NCKH_HANGOSELL.Data
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Customer> Customers { get; set; }
 
-        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+
+        /*public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             foreach (var entry in ChangeTracker.Entries<User>())
             {
@@ -28,6 +30,6 @@ namespace NCKH_HANGOSELL.Data
             }
 
             return await base.SaveChangesAsync(cancellationToken);
-        }
+        }*/
     }
 }

@@ -85,17 +85,35 @@
                                         <div class="col-11">
                                             <div class="form-group local-forms">
                                                 <label>Profile <span class="login-danger">*</span></label>
-                                                <input type="file" class="form-control" style="height: 45px;" name="avatar">
+                                                <input type="file" id="image" name="image" class="form-control" style="height: 45px;">
                                             </div>
                                         </div>
                                         <div class="col-1">
-                                            <div class="user-img" style="margin-left: -20px;height: 45px;">
-                                                <img class="rounded-circle" src="@Url.Content("~/images/" + Model?.Avatar)">
+                                            <div class="user-img" id="prenone" style="margin-left: -20px;height: 45px;">
+                                                <img class="rounded-circle" src="~/@Model.Avatar" id="prenoneImg">
+                                            </div>
+                                            <div class="user-img" id="preview" style="margin-left: -20px;height: 45px; display:none;">
+                                                <img class="rounded-circle" id="previewImg">
                                             </div>
                                         </div>
-                                        <input type="hidden" name="hidden_avatar" value="@Model?.Avatar">
                                     </div>
                                 </div>
+                                <script>
+                                    document.getElementById('image').addEventListener('change', function (event) {
+                                        const file = event.target.files[0];
+                                        if (file) {
+                                            const reader = new FileReader();
+                                            reader.onload = function (e) {
+                                                const preview = document.getElementById('previewImg');
+                                                preview.src = e.target.result;
+                                                preview.parentElement.style.display = 'block';
+                                                const prenone = document.getElementById('prenoneImg');
+                                                prenone.parentElement.style.display = 'none';
+                                            };
+                                            reader.readAsDataURL(file);
+                                        }
+                                    });
+                                </script>
                                 <div class="col-12 col-sm-4">
                                     <div class="form-group local-forms">
                                         <label for="position" class="form-label">Position <span class="login-danger">*</span></label>
@@ -115,7 +133,6 @@
                                 </div>
                             </div>
                         </form>
-
                     </div>
                 </div>
             </div>

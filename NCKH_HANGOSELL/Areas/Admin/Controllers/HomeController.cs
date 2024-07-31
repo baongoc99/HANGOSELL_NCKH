@@ -16,6 +16,7 @@ namespace NCKH_HANGOSELL.Areas.Admin.Controllers
                 ViewData["JoinDate"] = HttpContext.Session.GetString("JoinDate");
                 ViewData["PhoneNumber"] = HttpContext.Session.GetString("PhoneNumber");
                 ViewData["Position"] = HttpContext.Session.GetString("Position");
+                ViewData["Avatar"] = HttpContext.Session.GetString("Avatar");
                 return View();
             }
             else

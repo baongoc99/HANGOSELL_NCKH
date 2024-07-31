@@ -13,6 +13,7 @@ builder.Services.AddNotyf(config => { config.DurationInSeconds = 10; config.IsDi
 
 /// vòng đời kết nối data
 builder.Services.AddScoped<UserRolesService>();
+builder.Services.AddScoped<CustomerService>();
 
 // add
 builder.Services.AddDbContext<ApplicationDbContext>(
