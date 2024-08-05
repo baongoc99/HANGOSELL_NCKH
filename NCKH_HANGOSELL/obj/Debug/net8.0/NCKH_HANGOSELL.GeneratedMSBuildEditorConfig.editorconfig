@@ -74,6 +74,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9TaWRlYmFyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/NCKH_HANGOSELL/NCKH_HANGOSELL/Areas/Admin/Views/Supplier/CreateSupplier.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU3VwcGxpZXJcQ3JlYXRlU3VwcGxpZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/NCKH_HANGOSELL/NCKH_HANGOSELL/Areas/Admin/Views/Supplier/EditSupplier.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU3VwcGxpZXJcRWRpdFN1cHBsaWVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/NCKH_HANGOSELL/NCKH_HANGOSELL/Areas/Admin/Views/Supplier/IndexSupplier.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU3VwcGxpZXJcSW5kZXhTdXBwbGllci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

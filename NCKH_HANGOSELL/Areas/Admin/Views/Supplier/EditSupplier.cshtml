@@ -1,0 +1,75 @@
+﻿@model NCKH_HANGOSELL.Models.Supplier
+
+@{
+    ViewData["Title"] = "Edit Supplier";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-wrapper">
+    <div class="content container-fluid">
+        <div class="page-header">
+            <div class="row align-items-center">
+                <div class="col">
+                    <h3 class="page-title">Edit Supplier</h3>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/Admin/Supplier/IndexSupplier">Supplier</a></li>
+                        <li class="breadcrumb-item active">Edit Supplier</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card comman-shadow">
+                    <div class="card-body">
+                        <form action="/Admin/Supplier/UpdateSupplier" method="POST">
+                            <input type="hidden" name="Id" value="@Model.Id" />
+                            <div class="row">
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Supplier ID <span class="login-danger">*</span></label>
+                                        <input type="id" id="supplyId" class="form-control" name="SupplyId" value="@Model?.SupplyId" required>
+                                        <span asp-validation-for="SupplierId" class="invalid-feedback"></span>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Supplier Name <span class="login-danger">*</span></label>
+                                        <input type="text" id="name" class="form-control" name="Name" value="@Model?.Name" required>
+                                        <span asp-validation-for="Name" class="invalid-feedback"></span>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Phone Number</label>
+                                        <input type="text" id="phoneNumber" class="form-control" name="PhoneNumber" value="@Model?.PhoneNumber" />
+                                        <span asp-validation-for="PhoneNumber" class="invalid-feedback"></span>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Email</label>
+                                        <input type="email" id="email" class="form-control" name="Email" value="@Model?.Email" />
+                                        <span asp-validation-for="Email" class="invalid-feedback"></span>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Address</label>
+                                        <input type="text" id="address" class="form-control" name="Address" value="@Model?.Address" />
+                                        <span asp-validation-for="Address" class="invalid-feedback"></span>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="customer-submit">
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

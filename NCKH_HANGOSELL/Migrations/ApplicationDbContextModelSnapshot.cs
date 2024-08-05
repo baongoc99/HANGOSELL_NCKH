@@ -30,21 +30,33 @@ namespace NCKH_HANGOSELL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("CategoryId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("CategoryName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Category");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CategoryName = "Electronics"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CategoryName = "Books"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CategoryName = "Clothing"
+                        });
                 });
 
             modelBuilder.Entity("NCKH_HANGOSELL.Models.Customer", b =>
@@ -113,6 +125,7 @@ namespace NCKH_HANGOSELL.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<decimal>("Price")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("Quantity")
@@ -128,6 +141,52 @@ namespace NCKH_HANGOSELL.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Product");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CategoryId = 1,
+                            Description = "Latest model smartphone",
+                            Image = "images/default.jpg",
+                            Name = "Smartphone",
+                            Price = 699.99m,
+                            Quantity = 50,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CategoryId = 1,
+                            Description = "High performance laptop",
+                            Image = "images/default.jpg",
+                            Name = "Laptop",
+                            Price = 1199.99m,
+                            Quantity = 30,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CategoryId = 2,
+                            Description = "Bestselling fiction book",
+                            Image = "images/default.jpg",
+                            Name = "Fiction Book",
+                            Price = 19.99m,
+                            Quantity = 100,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CategoryId = 3,
+                            Description = "Comfortable cotton t-shirt",
+                            Image = "images/default.jpg",
+                            Name = "T-Shirt",
+                            Price = 9.99m,
+                            Quantity = 200,
+                            Status = "Available"
+                        });
                 });
 
             modelBuilder.Entity("NCKH_HANGOSELL.Models.Supplier", b =>
@@ -163,7 +222,29 @@ namespace NCKH_HANGOSELL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Supplier");
+                    b.ToTable("Suppliers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Address = "123 Main St, City, Country",
+                            CreatedAt = new DateTime(2024, 8, 5, 8, 46, 4, 196, DateTimeKind.Utc).AddTicks(9899),
+                            Email = "contact@abcsupplies.com",
+                            Name = "ABC Supplies",
+                            PhoneNumber = "123-456-7890",
+                            SupplyId = "SUP001"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Address = "456 Elm St, City, Country",
+                            CreatedAt = new DateTime(2024, 8, 5, 8, 46, 4, 196, DateTimeKind.Utc).AddTicks(9902),
+                            Email = "contact@xyzdistributors.com",
+                            Name = "XYZ Distributors",
+                            PhoneNumber = "098-765-4321",
+                            SupplyId = "SUP002"
+                        });
                 });
 
             modelBuilder.Entity("NCKH_HANGOSELL.Models.User", b =>
@@ -224,6 +305,56 @@ namespace NCKH_HANGOSELL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Avatar = "images/default.jpg",
+                            DateOfBirth = new DateTime(1980, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "admin@example.com",
+                            JoinDate = new DateTime(2024, 8, 5, 8, 46, 4, 196, DateTimeKind.Utc).AddTicks(9927),
+                            Name = "Admin",
+                            Password = "admin123",
+                            PhoneNumber = "111-222-3333",
+                            Position = "Administrator",
+                            RecordCreatedOn = new DateTime(2024, 8, 5, 8, 46, 4, 196, DateTimeKind.Utc).AddTicks(9929),
+                            RoleName = "Admin",
+                            Status = "Active",
+                            UserId = "admin"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Avatar = "images/default.jpg",
+                            DateOfBirth = new DateTime(1990, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "john@example.com",
+                            JoinDate = new DateTime(2024, 8, 5, 8, 46, 4, 196, DateTimeKind.Utc).AddTicks(9932),
+                            Name = "John Doe",
+                            Password = "password123",
+                            PhoneNumber = "222-333-4444",
+                            Position = "User",
+                            RecordCreatedOn = new DateTime(2024, 8, 5, 8, 46, 4, 196, DateTimeKind.Utc).AddTicks(9933),
+                            RoleName = "User",
+                            Status = "Active",
+                            UserId = "john_doe"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Avatar = "images/default.jpg",
+                            DateOfBirth = new DateTime(2000, 7, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "guest@example.com",
+                            JoinDate = new DateTime(2024, 8, 5, 8, 46, 4, 196, DateTimeKind.Utc).AddTicks(9934),
+                            Name = "Guest User",
+                            Password = "guest123",
+                            PhoneNumber = "333-444-5555",
+                            Position = "Guest",
+                            RecordCreatedOn = new DateTime(2024, 8, 5, 8, 46, 4, 196, DateTimeKind.Utc).AddTicks(9935),
+                            RoleName = "Guest",
+                            Status = "Inactive",
+                            UserId = "guest_user"
+                        });
                 });
 
             modelBuilder.Entity("NCKH_HANGOSELL.Models.Product", b =>

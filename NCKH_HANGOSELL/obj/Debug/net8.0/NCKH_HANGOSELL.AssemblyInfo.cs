@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("NCKH_HANGOSELL")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+923109eeee625c393d979e81003b48a940ed52b1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bd20c986935a8c75df4e1c69fe322f7b41278d87")]
 [assembly: System.Reflection.AssemblyProductAttribute("NCKH_HANGOSELL")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NCKH_HANGOSELL")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

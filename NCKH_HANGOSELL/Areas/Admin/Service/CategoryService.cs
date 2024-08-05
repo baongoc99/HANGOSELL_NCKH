@@ -34,7 +34,7 @@ namespace NCKH_HANGOSELL.Areas.Admin.Service
         // Cập nhật thông tin loai
         public void UpdateCategory(Category category)
         {
-            var existingCategory = _context.Categories.SingleOrDefault(u => u.CategoryId == category.CategoryId);
+            var existingCategory = _context.Categories.SingleOrDefault(u => u.Id == category.Id);
             if (existingCategory != null)
             {
                 _context.Entry(existingCategory).CurrentValues.SetValues(category);

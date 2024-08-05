@@ -9,12 +9,10 @@ namespace NCKH_HANGOSELL.Models
         [Key]
         public int Id { get; set; }
 
-        public string CategoryId { get; set; }
-
         [Required]
         public string CategoryName { get; set; }
 
-        public string Description { get; set; }
+        public string? Description { get; set; }
     }
 
 }
