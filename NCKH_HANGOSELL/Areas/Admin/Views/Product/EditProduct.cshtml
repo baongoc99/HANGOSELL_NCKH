@@ -1,0 +1,138 @@
+﻿@model NCKH_HANGOSELL.Models.EditProductViewModel
+
+@{
+    ViewData["Title"] = "Edit Product";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-wrapper">
+    <div class="content container-fluid">
+        <div class="page-header">
+            <div class="row align-items-center">
+                <div class="col-sm-12">
+                    <div class="page-sub-header">
+                        <h3 class="page-title">Edit Products</h3>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Product")">Products</a></li>
+                            <li class="breadcrumb-item active">Edit Products</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card comman-shadow">
+                    <div class="card-body">
+                        <form action="/admin/product/edit" method="post" enctype="multipart/form-data">
+                            <input type="hidden" class="form-control " name="Id" value="@Model?.Product.Id">
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <h5 class="form-title customer-info">Product Information</h5>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Name <span class="login-danger">*</span></label>
+                                        <input type="text" class="form-control "name="Name" value="@Model?.Product.Name">
+                                        <span asp-validation-for="Name" class="invalid-feedback"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Description <span class="login-danger">*</span></label>
+                                        <input type="text" class="form-control " name="Description" value="@Model?.Product.Description">
+                                        <span asp-validation-for="Description" class="invalid-feedback"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Price <span class="login-danger">*</span></label>
+                                        <input type="text" class="form-control " name="Price" value="@Model?.Product.Price">
+                                        <span asp-validation-for="Price" class="invalid-feedback"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Quantity <span class="login-danger">*</span></label>
+                                        <input type="number" class="form-control" name="Quantity" value="@Model?.Product.Quantity">
+                                        <span asp-validation-for="Quantity" class="invalid-feedback"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Status <span class="login-danger">*</span></label>
+                                        <input type="text" class="form-control" name="Status" value="@Model?.Product.Status">
+                                        <span asp-validation-for="Status" class="invalid-feedback"></span>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Category <span class="login-danger">*</span></label>
+                                        <select class="form-select" name="CategoryId" >
+                                            @foreach (var category in Model.Categories)
+                                            {
+                                                <option value="@category.Id" @(category.Id == Model.Product.CategoryId ? "selected" : "")>
+                                                    @category.CategoryName
+                                                </option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-sm-4">
+                                    <div class="row">
+                                        <div class="col-11">
+                                            <div class="form-group local-forms">
+                                                <label>Profile <span class="login-danger">*</span></label>
+                                                <input type="file" id="image" name="image" class="form-control" style="height: 45px;">
+                                            </div>
+                                        </div>
+                                        <div class="col-1">
+                                            <div class="user-img" id="prenone" style="margin-left: -20px;height: 45px;">
+                                                <img class="rounded-circle" src="~/@Model?.Product.Image" id="prenoneImg">
+                                            </div>
+                                            <div class="user-img" id="preview" style="margin-left: -20px;height: 45px; display:none;">
+                                                <img class="rounded-circle" id="previewImg">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <script>
+                                    document.getElementById('image').addEventListener('change', function (event) {
+                                        const file = event.target.files[0];
+                                        if (file) {
+                                            const reader = new FileReader();
+                                            reader.onload = function (e) {
+                                                const preview = document.getElementById('previewImg');
+                                                preview.src = e.target.result;
+                                                preview.parentElement.style.display = 'block';
+                                                const prenone = document.getElementById('prenoneImg');
+                                                prenone.parentElement.style.display = 'none';
+                                            };
+                                            reader.readAsDataURL(file);
+                                        }
+                                    });
+                                </script>
+
+                                <div class="col-12">
+                                    <div class="student-submit">
+                                        <button type="submit" class="btn btn-primary">Save Product</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

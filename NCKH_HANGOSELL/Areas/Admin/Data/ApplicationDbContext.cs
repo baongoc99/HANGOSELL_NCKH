@@ -15,22 +15,18 @@ namespace NCKH_HANGOSELL.Data
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Supplier> Supplier { get; set; }
 
-        /*public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            foreach (var entry in ChangeTracker.Entries<User>())
-            {
-                if (entry.State == EntityState.Added || entry.State == EntityState.Modified)
-                {
-                    var user = entry.Entity;
-                    if (string.IsNullOrEmpty(user.Avatar))
-                    {
-                        user.Avatar = "/default-avatar.jpg";
-                    }
-                }
-            }
+            base.OnModelCreating(modelBuilder);
 
-            return await base.SaveChangesAsync(cancellationToken);
-        }*/
+            modelBuilder.Entity<Product>(entity =>
+            {
+                entity.Property(e => e.Price).HasColumnType("decimal(18,2)"); // Cấu hình kiểu dữ liệu cho Price
+                // Hoặc sử dụng HasPrecision nếu bạn muốn
+                // entity.Property(e => e.Price).HasPrecision(18, 2);
+            });
+        }
     }
 }

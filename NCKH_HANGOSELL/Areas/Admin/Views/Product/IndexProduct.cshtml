@@ -1,0 +1,103 @@
+﻿@model IEnumerable<NCKH_HANGOSELL.Models.Product>
+
+@{
+    ViewData["Title"] = "List Product";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-wrapper">
+    <div class="content container-fluid">
+        <div class="page-header">
+
+            <div class="row align-items-center">
+                <div class="col">
+                    <h3 class="page-title">List Product</h3>
+                    <div class="col-auto text-end float-end ms-auto download-grp">
+                        <a href="/Admin/Product/IndexProduct" class="btn btn-outline-primary me-2">
+                            <i class="fas fa-download"></i> Download
+                        </a>
+                        <a href="/Admin/Product/CreateProduct" class="btn btn-primary">
+                            <i class="fas fa-plus"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="card card-table comman-shadow">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-stripped table-hover table-center mb-0" id="dataList">
+                            <thead class="student-thread">
+                                <tr>
+                                    <th class="text-center">ID</th>
+                                    <th class="text-center">Name</th>
+                                    <th class="text-center">Description</th>
+                                    <th class="text-center">Price</th>
+                                    <th class="text-center">Quantity</th>
+                                    <th class="text-center">Image</th>
+                                    <th class="text-center">Status</th>
+                                    <th class="text-center">Category</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var product in Model)
+                                {
+                                    <tr>
+                                        <td class="text-center">@product.Id</td>
+                                        <td class="text-center">@product.Name</td>
+                                        <td class="text-center">@product.Description</td>
+                                        <td class="text-center">@product.Price</td>
+                                        <td class="text-center">@product.Quantity</td>
+                                        <td class="text-center">
+                                            <img src="~/@product.Image" alt="Product Image" style="max-width: 100px; max-height: 100px;" />
+                                        </td>
+                                        <td class="text-center">@product.Status</td>
+                                        <td class="text-center">@product.Category.CategoryName</td>
+                                        <td class="text-center">
+                                            <a href="/Admin/Product/EditProduct?id=@product.Id" class="btn btn-sm btn-warning">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            <a href="/Admin/Product/DeleteProduct/@product.Id" class="btn btn-sm btn-danger">
+                                                <i class="fa fa-trash"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal custom-modal fade" id="delete" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="form-header">
+                    <h3>Delete Product</h3>
+                    <p>Are you sure you want to delete?</p>
+                </div>
+                <div class="modal-btn delete-action">
+                    <div class="row">
+                        <form asp-action="Delete" asp-controller="Product" method="post">
+                            <input type="hidden" name="Id" class="e_id" value="">
+                            <div class="row">
+                                <div class="col-6">
+                                    <button type="submit" class="btn btn-primary paid-continue-btn" style="width: 100%;">Delete</button>
+                                </div>
+                                <div class="col-6">
+                                    <a data-bs-dismiss="modal" class="btn btn-primary paid-cancel-btn">Cancel</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,149 @@
+﻿@model List<NCKH_HANGOSELL.Models.Category>
+
+
+@{
+    ViewData["Title"] = "Edit Product";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-wrapper">
+    <div class="content container-fluid">
+
+        <div class="page-header">
+            <div class="row align-items-center">
+                <div class="col-sm-12">
+                    <div class="page-sub-header">
+                        <h3 class="page-title">Edit Products</h3>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Product")">Products</a></li>
+                            <li class="breadcrumb-item active">Edit Products</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @if (TempData["Message"] != null)
+        {
+            <div class="alert alert-success">
+                @TempData["Message"]
+            </div>
+        }
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card comman-shadow">
+                    <div class="card-body">
+                        <form action="/Admin/Product/CreateProduct" method="post" enctype="multipart/form-data">
+                            
+                            <div class="row">
+                                <div class="col-12">
+                                    <h5 class="form-title customer-info">Product Information</h5>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Name <span class="login-danger">*</span></label>
+                                        <input type="text" class="form-control"  name="Name" >
+                                        <span asp-validation-for="Name" class="invalid-feedback"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Description <span class="login-danger">*</span></label>
+                                        <input type="text" class="form-control " name="Description" >
+                                        <span asp-validation-for="Description" class="invalid-feedback"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Price <span class="login-danger">*</span></label>
+                                        <input type="text" class="form-control" name="Price" >
+                                        <span asp-validation-for="Price" class="invalid-feedback"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Quantity <span class="login-danger">*</span></label>
+                                        <input type="number" class="form-control" name="Quantity" required>
+                                        <span asp-validation-for="Quantity" class="invalid-feedback"></span>
+                                    </div>
+                                </div>
+
+                              @*   <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Image <span class="login-danger">*</span></label>
+                                        <input type="file" class="form-control" name="Image" required>
+                                        <span asp-validation-for="Image" class="invalid-feedback"></span>
+                                    </div>
+                                </div>
+ *@
+                                <div class="col-12 col-sm-4">
+                                    <div class="row">
+                                        <div class="col-11">
+                                            <div class="form-group local-forms">
+                                                <label>Image <span class="login-danger">*</span></label>
+                                                <input type="file" class="form-control" accept="image/*" onchange="previewImage(event)" style="height: 45px;" name="image">
+                                            </div>
+                                        </div>
+                                        <div class="col-1">
+                                            <div class="user-img" style="margin-left: -20px; height: 45px;">
+                                                <img id="preview" class="rounded-circle" src="@Model ?? Url.Content(" ~ /images/default.jpg")" alt="Preview Image" />
+                                            </div>
+                                            @if (ViewBag.Message != null)
+                                            {
+                                                <div class="alert alert-info">@ViewBag.Message</div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                <script>
+                                    function previewImage(event) {
+                                        var reader = new FileReader();
+                                        reader.onload = function () {
+                                            var output = document.getElementById('preview');
+                                            output.src = reader.result;
+                                            output.style.display = 'block'; // Display the image
+                                        }
+                                        reader.readAsDataURL(event.target.files[0]); // Read the image file
+                                    }
+                                </script>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Status <span class="login-danger">*</span></label>
+                                        <input type="text" class="form-control" name="Status" required>
+                                        <span asp-validation-for="Status" class="invalid-feedback"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Category <span class="login-danger">*</span></label>
+                                        <select class="form-select" name="CategoryId">
+                                            @foreach (var category in Model)
+                                            {
+                                                <option value="@category.Id">@category.CategoryName</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="student-submit">
+                                        <button type="submit" class="btn btn-primary">Save Product</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -241,7 +241,7 @@ namespace NCKH_HANGOSELL.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Register()
         {
-            return View();
+            return Redirect($"/Home/Register/");
         }
 
 

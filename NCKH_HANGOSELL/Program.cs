@@ -15,7 +15,8 @@ builder.Services.AddNotyf(config => { config.DurationInSeconds = 10; config.IsDi
 builder.Services.AddScoped<UserRolesService>();
 builder.Services.AddScoped<CustomerService>();
 builder.Services.AddScoped<CategoryService>();
-//builder.Services.AddScoped<ProductService>();
+builder.Services.AddScoped<ProductService>();
+builder.Services.AddScoped<SupplierService>();
 
 // add
 builder.Services.AddDbContext<ApplicationDbContext>(
@@ -58,7 +59,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
 name: "default",
-pattern: "{controller=Home}/{Action=login}/{id?}");
+pattern: "{controller=Home}/{Action=Login}/{id?}");
 app.MapControllerRoute(
 name: "areas",
     pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
